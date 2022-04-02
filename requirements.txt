@@ -1,0 +1,4 @@
+PyQt6~=6.2.3
+QtRangeSlider~=0.1.5
+wavio~=0.0.4
+numpy~=1.22.3
