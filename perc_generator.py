@@ -1,6 +1,7 @@
 import wavio
 import numpy as np
 import os
+from datetime import datetime
 
 text = 'Deine Mutter'
 file_name = 'perc_test'
@@ -8,12 +9,15 @@ bpm = 90
 rate = 44100
 res = 1 / 32
 freq = 100
-sample_dir = 'Hats'
+sample_dir = 'Samples'
 dynamic_min = 0.7
 dynamic_max = 0.8
+date = True
 
 text_bin = []
 samples = []
+current_date = datetime.now()
+date_time = current_date.strftime("%d_%m_%H_%M_%S")
 length_beat = int(rate * 60 * 4 * res / bpm)
 length_all = int(8 * length_beat * len(text))
 pos = 0
@@ -66,9 +70,12 @@ def append_sample():
 
 
 def export_wav_file():
-    if not os.path.exists('wav'):
-        os.mkdir('wav')
-    wavio.write(f'wav/{file_name}.wav', wav_array, rate, sampwidth=3)
+    global file_name
+    if not os.path.exists('Exports'):
+        os.mkdir('Exports')
+    if date:
+        file_name = f'{file_name}_{date_time}'
+    wavio.write(f'Exports/{file_name}.wav', wav_array, rate, sampwidth=3)
 
 
 if __name__ == '__main__':
